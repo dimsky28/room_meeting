@@ -4,37 +4,33 @@
 
 @section('content')
 
-    <main class="content px-3 py-2">
-        <div class="container-fluid">
-            <div class="mb-3">
-                <h2>Ruangan Yang Di Hapus</h2>
-                <div class="mt-5 d-flex justify-content-end">
-                    <a href="/rooms" class="btn btn-primary me-3">Back</a>
-                </div>
+<link rel="icon" href="img/logokatarjp.png" type="image/x-icon">
 
-                    <div class="mt-5">
-                            @if (session('status'))
-                            <div class="alert alert-success">
-                                {{ session('status') }}
-                        @endif
-                            </div>
-                    </div>
-                    <div class="card border-0">
-                        <div class="card-header">
-                            <h5 class="card-title">
-                                Ruangan yang telah dihapus
-                            </h5>
-                        </div>
-                        <div class="tabel-responsive" style="overflow-x: auto;">
-                            <table class="table">
+<div class="wrapper">
+    <div class="main">
+        <main class="content px-3 py-2">
+            <div class="container-fluid">
+                <div class="mb-3 d-flex justify-content-between align-items-center">
+                    <h4>Ruangan Yang Dihapus</h4>
+                </div>
+                <div>
+                    <a href="/rooms" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Kembali</a>
+                </div>
+                @if (session('status'))
+                    <div class="alert alert-success mt-4">{{ session('status') }}</div>
+                @endif
+                <div class="card border-0 mt-4">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>No.</th>
-                                        <th>Nama Ruangan</th>
-                                        <th>Kapasitas</th>
-                                        <th>Kategori</th>
-                                        <th>Status</th>
-                                        <th>Aksi</th>
+                                        <th scope="col">No.</th>
+                                        <th scope="col">Nama Ruangan</th>
+                                        <th scope="col">Kapasitas</th>
+                                        <th scope="col">Kategori</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -60,6 +56,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </main>
+        </main>
+    </div>
+</div>
 @endsection

@@ -18,25 +18,24 @@ a {
     cursor: pointer;
     text-decoration: none;
     font-family: 'Poppins', sans-serif;
-    color: #e9ecef;
-    font-size: medium;
-}
-
-.bi {
-    font-size: large;
-    padding-left: 20px;
-
 }
 
 li {
     list-style: none;
-    padding-bottom: 12%;
 }
 
 h4 {
     font-family: 'Poppins', sans-serif;
     font-size: 1.275rem;
     color: var(--bs-emphasis-color);
+}
+
+/* image profil */
+.rounded-image {
+    width: 200px; /* Atur ukuran gambar sesuai kebutuhan */
+    height: 200px;
+    object-fit: cover; /* Memastikan gambar mengisi area dengan proporsi yang benar */
+    border-radius: 50%; /* Membuat gambar menjadi bulat */
 }
 
 /* Layout for admin dashboard skeleton */
@@ -54,7 +53,6 @@ h4 {
     transition: all 0.35s ease-in-out;
 }
 
-
 .main {
     display: flex;
     flex-direction: column;
@@ -70,7 +68,6 @@ h4 {
 
 .sidebar-logo {
     padding: 1.15rem;
-    padding-bottom: 20%;
 }
 
 .sidebar-logo a {
@@ -85,18 +82,6 @@ h4 {
     margin-bottom: 0;
     padding-left: 0;
     margin-left: 0;
-}
-
-/* .sidebar a:hover {
-    background: #dddddd;
-    border-radius: 2rem;
-} */
-
-.active {
-    background-color: transparent;
-    color: var(--bs-yellow);
-    font-weight: bold;
-    border: none;
 }
 
 .sidebar-header {
@@ -131,9 +116,49 @@ a.sidebar-link {
     transition: all .2s ease-out;
 }
 
+
+/* new users */
+.users {
+    margin-top: 1.3rem;
+}
+
+.user-list {
+    background-color: var(--bs-white);
+    padding: var(--bs-card-padding, 1rem);
+    border-radius: var(--bs-card-border-radius, 0.25rem);
+    margin-top: 1rem;
+    box-shadow: var(--bs-box-shadow, 0 0.5rem 1rem rgba(0, 0, 0, 0.15));
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1.4rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.user-list:hover {
+    box-shadow: none;
+}
+
+.user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.user img {
+    width: 5rem;
+    height: 5rem;
+    margin-bottom: 0.4rem;
+    border-radius: 50%;
+}
+/* new users end */
+
 .avatar {
     height: 40px;
     width: 40px;
+    border-radius: 50%;
 }
 
 .navbar-expand .navbar-nav {
@@ -159,7 +184,7 @@ a.sidebar-link {
 }
 
 .illustration {
-    background-color: var(--bs-yellow);
+    background-color: var(--bs-primary-bg-subtle);
     color: var(--bs-emphasis-color);
 }
 
@@ -220,95 +245,8 @@ html[data-bs-theme="dark"] .theme-toggle .fa-moon {
 }
 
 html[data-bs-theme="light"] .theme-toggle .fa-sun {
-    display: none;
+    display: none;
 }
 
-/* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
+/* table */
 
-
-
-:root {
-    --color-info-dark: #7d8da1;
-    --color-dark: #363949;
-    --color-light: rgba(132, 139, 200, 0.18);
-    --color-dark-variant: #677483;
-    --box-shadow: 0 2rem 3rem var(--color-light);
-}
-
-.main {
-    height: 100vh;
-    width: 100vw;
-    font-family: "Poppins", sans-serif;
-    font-size: 0.88rem;
-    user-select: none;
-    overflow-x: hidden;
-    color: var(--color-dark);
-    background-color: #bebebe;
-}
-
-.dark-mode-variables {
-    --color-background: #181a1e;
-    --color-white: #dbdcdd;
-    --color-dark: #edeffd;
-    --color-dark-variant: #a3bdcc;
-    --color-light: rgba(0, 0, 0, 0.4);
-    --box-shadow: 0 2rem 3rem var(--color-light);
-} */
-
-/* CSS SIDE BAR
-.sidebar {
-    background: #181a1e;
-    color: #fff;
-}
-
-.logo {
-    padding: 15px;
-    color: aqua;
-}
-
-.sidebar a {
-    color: #6b6969;
-    text-decoration: none;
-    display: block;
-    padding: 15px 50px;
-    transition: all 1.6s ease;
-}
-
-.sidebar a:hover {
-    background: #dddddd;
-    border-radius: 2rem;
-}
-
-.active {
-    background: #fffdfd;
-    border-right: solid 8px rgb(163, 163, 167);
-}
-/* CSS SIDE BAR */
-
-/* CARD DATA DASHBOARD
-.card-data {
-    padding: 20px 50px;
-    background-color: #181a1e;
-    color: #fff;
-    border-radius: 2rem;
-    margin-top: 1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.card-data > div:hover {
-    box-shadow: none;
-}
-
-.card-data i {
-    font-size: 40px;
-}
-
-.card-desc {
-    font-size: 30px;
-}
-
-.card-count {
-    font-size: 30px;
-}
-/* CARD DATA DASHBOARD */

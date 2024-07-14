@@ -3,6 +3,9 @@
 @section('title', 'Delete Room')
 
 @section('content')
+
+<link rel="icon" href="img/logokatarjp.png" type="image/x-icon">
+
 <main class="content px-3 py-2">
     <div class="container-fluid">
         <div class="mb-3 align-items-center justify-content-center text-center">

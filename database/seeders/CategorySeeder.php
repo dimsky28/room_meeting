@@ -19,7 +19,7 @@ class CategorySeeder extends Seeder
         Schema::enableForeignKeyConstraints();
 
         $data = [
-            'lantai 1','lantai 2','lantai 3','lantai 4'
+            'RW 01','RW 02','RW 03','RW 04','RW 05','RW 06','RW 07','RW 08','RW 09','RW 10',
         ];
 
         foreach ($data as $value) {
