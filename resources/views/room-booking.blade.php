@@ -40,6 +40,15 @@
                             @endforeach
                         </select>
                     </div>
+                    <div class="mb-3">
+                        <label for="booking_time">Booking Time</label>
+                        <input type="text" id="booking_time" name="booking_time" class="datetimepicker form-control">
+                    </div>
+                    <div class="col-12 col-sm-6 mb-3">
+                        <label for="return_time">Return Time</label>
+                        <input type="text" id="return_time" name="return_time" class="datetimepicker form-control">
+                    </div>
+                    <div>
                     <div>
                         <button type="submit" class="btn btn-primary w-100">Pesan</button>
                     </div>
@@ -51,6 +60,13 @@
 <script>
     $(document).ready(function() {
         $('.inputbox').select2();
+    });
+</script>
+<script>
+    $(document).ready(function(){
+        $('.datetimepicker').datetimepicker({
+            format: 'Y-m-d H:i:s'  // Format tanggal dan waktu
+        });
     });
 </script>
 @endsection

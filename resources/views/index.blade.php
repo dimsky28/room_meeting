@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <title>Home</title>
-    <link rel="icon" href="img/logo-kpu.png" type="image/x-icon">
+    <link rel="icon" href="img/logokatarjp.png" type="image/x-icon">
   </head>
   <body>
     <header class="beranda" id="beranda">
@@ -46,10 +46,6 @@
                   <i class="ri-gallery-fill"></i>
                   <a href="#gallery">Gallery</a>
                 </li>
-                <!--<li class="btn btn-outline-transparant">
-                  <i class="ri-contacts-line"></i>
-                  <a href="#contact">Contact</a>
-                </li> -->
               </ul>
             </div>
             <div class="box menu-bar">
@@ -63,7 +59,7 @@
       <!-- Hero -->
       <section class="hero" id="hero">
           <div class="animate__animated animate__jackInTheBox">
-          <h1 >KOMISI PEMILIHAN UMUM REPUBLIK INDONESIA</h1>
+          <h1 >Karang Taruna Kelurahan Jatipulo</h1>
           </div>
       </section>
       <!-- Hero -->
@@ -77,7 +73,7 @@
             <h1>RUANG SIDANG UTAMA KPU RI</h1>
           </div>
           <div class="box" data-aos="fade-left" data-aos-duration="1800" data-aos-delay="200">
-            <img src="/img/SIDANG.JPG" alt="" />
+            <img src="/img/karangtarunajatipulo.png" alt="" />
           </div>
         </div>
       </div>

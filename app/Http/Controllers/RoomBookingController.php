@@ -16,13 +16,18 @@ class RoomBookingController extends Controller
     {
         $users = User::where('id', '!=', 1)->where('status', '!=', 'inactive')->get();
         $rooms = Room::all();
-        return view('room-booking', ['users' => $users, 'rooms' => $rooms]);   
+        return view('room-booking', ['users' => $users, 'rooms' => $rooms]);
     }
 
     function store(Request $request)
     {
-        $request['booking_time'] = Carbon::now()->toDateTimeString();
-        $request['return_time'] = Carbon::now()->addHours(3)->toDateTimeString();
+        $validated = $request->validate([
+            'booking_time' => 'required|date_format:Y-m-d H:i:s',
+            'return_time' => 'required|date_format:Y-m-d H:i:s',  // Validasi format tanggal dan waktu
+
+        ]);
+        // $request['booking_time'] = Carbon::now()->toDateTimeString();
+        // $request['return_time'] = Carbon::now()->addHours(3)->toDateTimeString();
 
         $room = Room::findOrFail($request->room_id)->only('status');
 
@@ -52,6 +57,43 @@ class RoomBookingController extends Controller
 
     }
 
+    public function adminReturnRoom()
+{
+    $users = User::where('id', '!=', 1)->where('status', '!=', 'inactive')->get();
+    $rooms = Room::all();
+    return view('admin-room-return', ['users' => $users, 'rooms' => $rooms]);
+}
+
+public function saveAdminReturnRoom(Request $request)
+{
+    $validatedData = $request->validate([
+        'user_id' => 'required|exists:users,id',
+        'room_id' => 'required|exists:rooms,id',
+    ]);
+
+    $booking = Booking::where('user_id', $request->user_id)
+                      ->where('room_id', $request->room_id)
+                      ->whereNull('actual_return_time')
+                      ->first();
+
+    if ($booking) {
+        $booking->actual_return_time = Carbon::now()->toDateTimeString();
+        $booking->save();
+
+        $room = Room::findOrFail($request->room_id);
+        $room->status = 'ready';
+        $room->save();
+
+        Session::flash('message', 'Mengembalikan Ruangan Berhasil');
+        Session::flash('alert-class', 'alert-success');
+    } else {
+        Session::flash('message', 'Gagal Mengembalikan Ruangan!');
+        Session::flash('alert-class', 'alert-danger');
+    }
+
+    return redirect('admin-room-return');
+}
+
     public function returnRoom()
     {
         $users = User::where('id', '!=', 1)->where('status', '!=', 'inactive')->get();
@@ -61,6 +103,10 @@ class RoomBookingController extends Controller
 
     public function saveReturnRoom(Request $request)
     {
+        $validated = $request->validate([
+            'actual_return_time' => 'required|date_format:Y-m-d H:i:s',
+        ]);
+
         // user & room yang dipilih untuk return benar, maka berhasil return room
         // user & room yang dipilih untuk return salah, maka muncul error notice
         $booking = Booking::where('user_id', $request->user_id)->where('room_id', $request->room_id)
@@ -70,8 +116,13 @@ class RoomBookingController extends Controller
 
         if($countData == 1) {
             // return room (berhasil)
-            $bookingData->actual_return_time = Carbon::now()->toDateTimeString();
+            $bookingData->actual_return_time = $request->actual_return_time;
             $bookingData->save();
+
+            // Update room status to ready
+            $room = Room::findOrFail($request->room_id);
+            $room->status = 'ready';  // Update
+            $room->save();
 
             Session::flash('message', 'Mengembalikan Ruangan Berhasil');
             Session::flash('alert-class', 'alert-success');

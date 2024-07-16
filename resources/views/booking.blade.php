@@ -8,6 +8,9 @@
     <div class="container-fluid">
         <div class="mb-3">
             <h2>Pemesanan</h2>
+            <div class="mt-5 d-flex justify-content-end">
+                <a href="/room-return" class="btn btn-primary me-3">Kembalikan</a>
+            </div>
             <x-booking-table :booking='$booking' />
         </div>
     </div>
