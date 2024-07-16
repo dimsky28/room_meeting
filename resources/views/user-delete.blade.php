@@ -4,6 +4,9 @@
 
 @section('content')
 
+<link rel="icon" href="img/logokatarjp.png" type="image/x-icon">
+
+
 
 <main class="content px-3 py-2">
     <div class="container-fluid">

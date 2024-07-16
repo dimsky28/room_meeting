@@ -30,6 +30,14 @@ h4 {
     color: var(--bs-emphasis-color);
 }
 
+/* image profil */
+.rounded-image {
+    width: 200px; /* Atur ukuran gambar sesuai kebutuhan */
+    height: 200px;
+    object-fit: cover; /* Memastikan gambar mengisi area dengan proporsi yang benar */
+    border-radius: 50%; /* Membuat gambar menjadi bulat */
+}
+
 /* Layout for admin dashboard skeleton */
 
 .wrapper {
@@ -108,9 +116,49 @@ a.sidebar-link {
     transition: all .2s ease-out;
 }
 
+
+/* new users */
+.users {
+    margin-top: 1.3rem;
+}
+
+.user-list {
+    background-color: var(--bs-white);
+    padding: var(--bs-card-padding, 1rem);
+    border-radius: var(--bs-card-border-radius, 0.25rem);
+    margin-top: 1rem;
+    box-shadow: var(--bs-box-shadow, 0 0.5rem 1rem rgba(0, 0, 0, 0.15));
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1.4rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.user-list:hover {
+    box-shadow: none;
+}
+
+.user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.user img {
+    width: 5rem;
+    height: 5rem;
+    margin-bottom: 0.4rem;
+    border-radius: 50%;
+}
+/* new users end */
+
 .avatar {
     height: 40px;
     width: 40px;
+    border-radius: 50%;
 }
 
 .navbar-expand .navbar-nav {

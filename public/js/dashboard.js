@@ -29,3 +29,48 @@ function isLight(){
 if(isLight()){
     toggleRootClass();
 }
+
+// Preview Image
+function previewImage(event) {
+    var reader = new FileReader();
+    reader.onload = function(){
+        var output = document.getElementById('imagePreview');
+        output.src = reader.result;
+        output.style.display = 'block';
+    };
+    reader.readAsDataURL(event.target.files[0]);
+}
+
+// modal delete user
+document.addEventListener('DOMContentLoaded', function () {
+    var deleteModal = document.getElementById('deleteModal');
+    deleteModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget;
+        var username = button.getAttribute('data-username');
+        var slug = button.getAttribute('data-slug');
+        var modalTitle = deleteModal.querySelector('.modal-title');
+        var modalBody = deleteModal.querySelector('.modal-body #deleteUserName');
+        var confirmDeleteButton = deleteModal.querySelector('#confirmDeleteButton');
+
+        modalTitle.textContent = 'Konfirmasi Hapus ' + username;
+        modalBody.textContent = username;
+        confirmDeleteButton.href = '/user-destroy/' + slug;
+    });
+});
+
+//// modal delete room
+document.addEventListener('DOMContentLoaded', function () {
+    var deleteModal = document.getElementById('deleteModal');
+    deleteModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget;
+        var room_name = button.getAttribute('data-room_name');
+        var slug = button.getAttribute('data-slug');
+        var modalTitle = deleteModal.querySelector('.modal-title');
+        var modalBody = deleteModal.querySelector('.modal-body #deleteUserName');
+        var confirmDeleteButton = deleteModal.querySelector('#confirmDeleteButton');
+
+        modalTitle.textContent = 'Konfirmasi Hapus ' + room_name;
+        modalBody.textContent = room_name;
+        confirmDeleteButton.href = '/room-destroy/' + slug;
+    });
+});

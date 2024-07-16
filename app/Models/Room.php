@@ -15,7 +15,7 @@ class Room extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'room_name', 'capacity', 'cover', 'slug'
+        'room_name', 'capacity', 'description', 'address', 'image', 'cover', 'slug'
     ];
 
     public function sluggable(): array

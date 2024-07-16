@@ -4,85 +4,91 @@
 
 @section('content')
 
+<link rel="icon" href="img/logokatarjp.png" type="image/x-icon">
+
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
 
-<main class="content px-3 py-2">
-        <div class="container-fluid">
-            <div class="mb-3">
-                <h2>Edit Ruangan</h2>
-                <div class="mt-5 w-50">
+<main class="content px-4 py-5">
+    <div class="container-fluid">
+        <div class="card shadow-sm p-4 mb-5 rounded">
+            <div class="card-body">
+                <h4 class="fw-bold mb-4">Edit Ruangan</h4>
 
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-
-                    <form action="/room-edit/{{$room->slug}}" method="post" enctype="multipart/form-data">
-                        @csrf
-                        <div class="mb-3">
-                            <label for="room_name" class="form-label">Nama Ruangan</label>
-                            <input type="text" name="room_name" id="room_name" class="form-control" placeholder="Room Name" value="{{ $room->room_name }}">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="capacity" class="form-label">Kapasitas</label>
-                            <input type="text" name="capacity" id="capacity" class="form-control" placeholder="Capacity" value="{{ $room->capacity }}">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="image" class="form-label">Gambar</label>
-                            <input type="file" name="image" class="form-control">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="currentImage" class="form-label" style="display:block">Gambar Sebelumnya</label>
-                            @if ($room->cover!='')
-                                <img src="{{ asset('storage/cover/'.$room->cover) }}" alt="" width="100px">
-                            @else
-                                <img src="{{ asset('image/notfile.png') }}" alt="" width="100px">
-                            @endif
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="category" class="form-label">Kategori</label>
-                            <select name="categories[]" id="category" class="form-control select-multiple" multiple>
-                                @foreach ($categories as $item)
-                                <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="currentCategory" class="form-label">Kategori Sebelumnya</label>
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                <form action="/room-edit/{{$room->slug}}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="currentImage" class="form-label">Gambar Sebelumnya</label>
+                                @if ($room->cover!='')
+                                <img src="{{ asset('storage/cover/'.$room->cover) }}" alt="Gambar Sebelumnya" class="d-block mb-2" style="max-width: 100%;">
+                                @endif
+                                <input type="file" name="image" accept="image/*" onchange="previewImage(event)" class="form-control">
+                                <img id="imagePreview" style="display: none; max-width: 100%; margin-top: 10px">
+                            </div>
+                            <div class="mb-3">
+                                <label for="category" class="form-label">Kategori</label>
+                                <select name="categories[]" id="category" class="form-control select-multiple" multiple>
+                                    @foreach ($categories as $item)
+                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    @endforeach
+                                </select>
+                                <label for="currentCategory" class="form-label">Kategori Sebelumnya</label>
                                 <ul>
                                     @foreach ($room->categories as $category)
                                         <li>{{ $category->name }}</li>
                                     @endforeach
                                 </ul>
+                            </div>
                         </div>
-
-                        <div class="mt-3">
-                            <button class="btn btn-success me-3" type="submit">Simpan</button>
-                            <a href="/rooms" class="btn btn-danger">Batal</a>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="room_name" class="form-label">Nama Ruangan</label>
+                                <input type="text" name="room_name" id="room_name" class="form-control" placeholder="Room Name" value="{{ $room->room_name }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="capacity" class="form-label">Kapasitas</label>
+                                <input type="text" name="capacity" id="capacity" class="form-control" placeholder="Kapasitas" value="{{ $room->capacity }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="address" class="form-label">Alamat</label>
+                                <input type="text" name="address" id="address" class="form-control" placeholder="Alamat" value="{{ $room->address }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="description" class="form-label">Deskripsi</label>
+                                <textarea type="text" name="description" id="description" class="form-control" placeholder="Deskripsi" value="{{ $room->description }}"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary mt-4">Perbarui</button>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
-    </main>
+    </div>
+</main>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('.select-multiple').select2();
-    });
-    </script>
+<script>
+    function previewImage(event) {
+        const reader = new FileReader();
+        reader.onload = function(){
+            const imagePreview = document.getElementById('imagePreview');
+            imagePreview.src = reader.result;
+            imagePreview.style.display = 'block';
+        }
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>
 
 @endsection
+
+

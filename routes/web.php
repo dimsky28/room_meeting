@@ -6,9 +6,11 @@ use App\Http\Controllers\RoomController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RoomBookingController;
+use App\Http\Controllers\NewsController; // Tambahkan ini
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +25,9 @@ use App\Http\Controllers\RoomBookingController;
 
 Route::get('/', [PublicController::class, 'index']);
 Route::get('room-list', [RoomController::class, 'list']);
+Route::get('/news', [NewsController::class, 'index'])->name('news.index');
+
+
 
 Route::middleware('only_guest')->group(function() {
     Route::get('login', [AuthController::class, 'login'])->name('login');
@@ -38,6 +43,11 @@ Route::middleware('auth')->group(function() {
     Route::post('room-booking', [RoomBookingController::class, 'store']);
     Route::get('room-return', [RoomBookingController::class, 'returnRoom']);
     Route::post('room-return', [RoomBookingController::class, 'saveReturnRoom']);
+    // Rute untuk mengedit dan memperbarui profil pengguna
+    Route::get('profile/edit', [UserController::class, 'edit'])->name('profile.edit');
+    Route::post('profile/update', [UserController::class, 'update'])->name('profile.update');
+    Route::get('/users/{slug}/edit', [UserController::class, 'edit'])->name('users.edit');
+    Route::post('/users/{slug}/update', [UserController::class, 'update'])->name('users.update');
 
     Route::middleware('only_admin')->group(function() {
         Route::get('dashboard', [DashboardController::class, 'index']);
@@ -65,14 +75,32 @@ Route::middleware('auth')->group(function() {
         Route::get('users', [UserController::class, 'index']);
         Route::get('registered-users', [UserController::class, 'registeredUser']);
         Route::get('user-detail/{slug}', [UserController::class, 'show']);
+        Route::get('user-edit/{slug}', [UserController::class, 'edit']);
+        Route::post('user-edit/{slug}', [UserController::class, 'update']);
         Route::get('user-approve/{slug}', [UserController::class, 'approve']);
         Route::get('user-ban/{slug}', [UserController::class, 'delete']);
         Route::get('user-destroy/{slug}', [UserController::class, 'destroy']);
         Route::get('user-banned', [UserController::class, 'bannedUser']);
         Route::get('user-restore/{slug}', [UserController::class, 'restore']);
 
-        Route::get('booking', [BookingController::class, 'index']);
+        Route::get('booking', [BookingController::class, 'index'])->name('booking.index');
+        Route::get('laporanpdf', [LaporanController::class, 'index']);
+        Route::get('/export-pdf', [LaporanController::class, 'exportPDF'])->name('export-pdf');
+        Route::post('/export-pdf', [LaporanController::class, 'exportPdf'])->name('export.pdf');
 
-    
+
+        Route::get('admin-room-return', [RoomBookingController::class, 'adminReturnRoom']);
+        Route::post('admin-room-return', [RoomBookingController::class, 'saveAdminReturnRoom']);
+
+
+        // Tambahkan route untuk berita
+        Route::get('/news', [NewsController::class, 'index'])->name('news.index');
+        Route::get('/create', [NewsController::class, 'create'])->name('news.create');
+        Route::post('/store', [NewsController::class, 'store'])->name('news.store');
+        Route::get('/admin-news', [NewsController::class, 'adminIndex'])->name('admin.news.index'); // Tambahkan ini
+        Route::get('/admin-news/edit/{id}', [NewsController::class, 'edit'])->name('admin.news.edit');
+        Route::post('/admin-news/update/{id}', [NewsController::class, 'update'])->name('admin.news.update');
+        Route::delete('/admin-news/destroy/{id}', [NewsController::class, 'destroy'])->name('admin.news.destroy');
+
     });
 });
